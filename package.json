@@ -1,0 +1,19 @@
+{
+  "name": "rcp2gems",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "bin": {
+    "rcp2gems": "./bin/rcp2gems"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bn.js": "^4.11.6",
+    "csv-parser": "^1.11.0",
+    "fast-csv": "^2.4.0",
+    "lodash": "^4.17.4",
+    "minimist": "^1.2.0",
+    "unquote": "^1.1.0"
+  }
+}
