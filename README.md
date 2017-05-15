@@ -18,3 +18,9 @@ AEM has a habit of rebranding existing products, so AEMData is a rebranded versi
 
 So it turns out GEMS Data Analysis is perfectly happy importing AEM Infinity `.itlog` files.
 So I decoded the `.itlog` format and now we have this tool.
+
+## Known issues
+
+ - The RaceCapture log has to have timestamps in order. I noticed sometimes the first row will have timestamp bigger than the following rows.
+ - Missing values are back-filled using 0. This causes issues in GPS coordinates
+ - It does cleanup on the headers. But if you already saved your log from Excel this may not work. Will add an option to skip header cleanup
