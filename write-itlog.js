@@ -2,9 +2,6 @@ const stream = require('stream');
 const _ = require('lodash');
 const BN = require('bn.js');
 
-
-
-
 class WriteLog extends stream.Transform {
   constructor() {
     super({objectMode: true});
@@ -17,6 +14,7 @@ class WriteLog extends stream.Transform {
       // write header
       const buf = this.writeHeader(data);
       this.push(buf);
+      this.processHeader = false;
     } else {
       const buf = this.writeRow(data);
       this.push(buf);
@@ -71,7 +69,6 @@ class WriteLog extends stream.Transform {
 
     buf.writeInt8(0x0, offset);
 
-    this.processHeader = false; 
 
     return buf;
   }

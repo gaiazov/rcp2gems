@@ -4,6 +4,7 @@ const csv = require('fast-csv');
 const cleanHeaders = require('./clean-headers');
 const fillRows = require('./fill-rows');
 const writeLog = require('./write-itlog');
+const degreesToRadians = require('./degrees-to-radians');
 
 function convert(filename, output) {
   return new Promise((resolve, reject) => {
@@ -11,6 +12,7 @@ function convert(filename, output) {
       .pipe(cleanHeaders())
       .pipe(csv())
       .pipe(fillRows())
+      .pipe(degreesToRadians())
       .pipe(writeLog())
       .pipe(fs.createWriteStream(output))
     
