@@ -50,13 +50,13 @@ class WriteLog extends stream.Transform {
     offset += 4;
 
     // this is a magic number
-    buf.writeInt32LE(0x204, offset);
+    buf.writeUInt32LE(0x204, offset);
     offset += 4;
 
     // number of columns needs to be written twice for some reason
-    buf.writeInt16LE(columns.length, offset);
+    buf.writeUInt16LE(columns.length, offset);
     offset += 2;
-    buf.writeInt16LE(columns.length, offset);
+    buf.writeUInt16LE(columns.length, offset);
     offset += 2;
     
     for (const column of columns) {
@@ -85,7 +85,7 @@ class WriteLog extends stream.Transform {
 
     timestamp = timestamp.sub(this.startTime);
 
-    let us10 = timestamp.mul(new BN(100)); // from ms to us/10
+    let us10 = timestamp.mul(new BN(10000)); // from ms to us/10
 
     // timestamp has to be split into high 32 and low 32 bytes
     const low = us10.maskn(32).toNumber();
@@ -97,10 +97,10 @@ class WriteLog extends stream.Transform {
     let offset = 0;
 
     // low and high are written as ints
-    buf.writeInt32LE(low, offset);
+    buf.writeUInt32LE(low, offset);
     offset += 4;
 
-    buf.writeInt32LE(high, offset);
+    buf.writeUInt32LE(high, offset);
     offset += 4;
 
     // everything else is written as 32 bit floats
